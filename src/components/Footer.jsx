@@ -53,7 +53,7 @@ export default function Footer({ setView }) {
           {/* Brand Info */}
           <div className="space-y-4 text-left">
             <div className="flex items-center">
-              <Logo className="h-7 w-auto" textClass="text-white" />
+              <Logo className="h-8 md:h-9 w-auto" />
             </div>
             <p className="text-xs leading-relaxed text-gray-500">
               Somos importadores directos de productos premium exclusivos. Seleccionamos cuidadosamente cada gadget y accesorio para ofrecerte la más alta calidad y un rendimiento incomparable.

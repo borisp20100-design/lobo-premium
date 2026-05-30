@@ -19,7 +19,7 @@ export default function Header({ currentView, setView, cartCount, openCart, onSe
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center cursor-pointer" onClick={() => { setView('home'); setMobileMenuOpen(false); }}>
-            <Logo className="h-9 w-auto" textClass="text-white hover:text-premium-gold transition-colors" />
+            <Logo className="h-10 md:h-12 w-auto" />
           </div>
 
           {/* Desktop Navigation */}
