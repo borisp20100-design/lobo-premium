@@ -2,6 +2,7 @@
   "name": "web-lobo",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://borisp20100-design.github.io/lobo-premium/",
   "type": "module",
   "scripts": {
     "dev": "vite",
