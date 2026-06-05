@@ -9,10 +9,10 @@ export const products = [
     rating: 4.9,
     reviewsCount: 248,
     images: [
-      "/lobo_wolf_glasses_1780699885633.png",
-      "/real_smart_glasses_1_1780699436243.png",
-      "/real_smart_glasses_2_1780699449872.png",
-      "/real_smart_glasses_3_1780699465002.png"
+      "./lobo_wolf_glasses_1780699885633.png",
+      "./real_smart_glasses_1_1780699436243.png",
+      "./real_smart_glasses_2_1780699449872.png",
+      "./real_smart_glasses_3_1780699465002.png"
     ],
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&start=43&end=53", // Simulación del video Rickroll de 10s con las gafas smart de fondo (ejemplo simulado de YouTube)
     variants: {
