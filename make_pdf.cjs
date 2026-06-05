@@ -96,11 +96,11 @@ function generatePDF() {
            align: 'center'
        });
 
-    doc.end();
-
     stream.on('finish', () => {
         console.log('PDF generado exitosamente en public/lobo_logo_sheet.pdf');
     });
+
+    doc.end();
 }
 
 generatePDF();
