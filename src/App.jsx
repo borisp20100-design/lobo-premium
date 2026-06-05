@@ -14,17 +14,8 @@ export default function App() {
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Localized products state persisted via localStorage but resetting to initialProducts if id changes
-  const [products, setProducts] = useState(() => {
-    const saved = localStorage.getItem('lobo_products');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed.length > 0 && parsed[0].id === initialProducts[0].id && parsed[0].images[0] === initialProducts[0].images[0]) {
-        return parsed;
-      }
-    }
-    return initialProducts;
-  });
+  // Localized products state read directly from products.js to prevent cache mismatch in production
+  const [products, setProducts] = useState(initialProducts);
 
   useEffect(() => {
     localStorage.setItem('lobo_products', JSON.stringify(products));
