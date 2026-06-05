@@ -47,7 +47,7 @@ function generatePDF() {
     
     doc.moveDown(0.5);
 
-    const posImagePath = path.join(__dirname, 'lobo_logo_positive_1780700374194.png');
+    const posImagePath = path.join(process.cwd(), 'public', 'lobo_logo_positive_1780700374194.png');
     if (fs.existsSync(posImagePath)) {
         doc.image(posImagePath, {
             fit: [200, 200],
@@ -73,7 +73,7 @@ function generatePDF() {
 
     doc.moveDown(0.5);
 
-    const negImagePath = path.join(__dirname, 'lobo_logo_negative_1780700389356.png');
+    const negImagePath = path.join(process.cwd(), 'public', 'lobo_logo_negative_1780700389356.png');
     if (fs.existsSync(negImagePath)) {
         doc.image(negImagePath, {
             fit: [200, 200],
