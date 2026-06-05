@@ -14,10 +14,16 @@ export default function App() {
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Localized products state persisted via localStorage
+  // Localized products state persisted via localStorage but resetting to initialProducts if id changes
   const [products, setProducts] = useState(() => {
     const saved = localStorage.getItem('lobo_products');
-    return saved ? JSON.parse(saved) : initialProducts;
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed.length > 0 && parsed[0].id === initialProducts[0].id && parsed[0].images[0] === initialProducts[0].images[0]) {
+        return parsed;
+      }
+    }
+    return initialProducts;
   });
 
   useEffect(() => {
@@ -104,7 +110,6 @@ export default function App() {
         setView={setView} 
         cartCount={cartCount} 
         openCart={() => setIsCartOpen(true)}
-        onSearch={setSearchQuery}
       />
 
       {/* Main Viewport Content */}
@@ -112,24 +117,6 @@ export default function App() {
         {view === 'home' && (
           <Home 
             products={products} 
-            setView={setView} 
-            setSelectedProductId={setSelectedProductId} 
-            onAddToCart={handleAddToCart}
-          />
-        )}
-        {view === 'catalog' && (
-          <Catalog 
-            products={products} 
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            setView={setView} 
-            setSelectedProductId={setSelectedProductId} 
-            onAddToCart={handleAddToCart}
-          />
-        )}
-        {view === 'product-detail' && (
-          <ProductDetail 
-            product={selectedProduct} 
             setView={setView} 
             onAddToCart={handleAddToCart}
             onAddReview={handleAddReview}

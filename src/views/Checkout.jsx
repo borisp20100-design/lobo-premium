@@ -16,8 +16,8 @@ export default function Checkout({ cartItems, clearCart, setView }) {
   });
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
-  const freeShippingThreshold = 300;
-  const shipping = subtotal >= freeShippingThreshold ? 0 : 15.00;
+  const freeShippingThreshold = 150000;
+  const shipping = subtotal >= freeShippingThreshold ? 0 : 9990;
   const total = subtotal + shipping;
 
   const handleInputChange = (e) => {
@@ -96,12 +96,6 @@ export default function Checkout({ cartItems, clearCart, setView }) {
           >
             Volver a la Página de Inicio
           </button>
-          <button
-            onClick={() => setView('catalog')}
-            className="w-full sm:w-auto px-8 py-3.5 bg-white/5 text-white font-bold text-xs rounded-xl border border-white/10 hover:bg-white/10 transition-colors"
-          >
-            Seguir Comprando
-          </button>
         </div>
       </div>
     );
@@ -111,10 +105,10 @@ export default function Checkout({ cartItems, clearCart, setView }) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-left space-y-8">
       {/* Back Button */}
       <button 
-        onClick={() => setView('catalog')}
+        onClick={() => setView('home')}
         className="flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-white transition-colors uppercase tracking-wider"
       >
-        <ArrowLeft className="w-4 h-4" /> Volver al catálogo
+        <ArrowLeft className="w-4 h-4" /> Volver al producto
       </button>
 
       <h1 className="text-3xl font-black text-white border-b border-white/5 pb-5">Finalizar Compra</h1>
@@ -273,7 +267,7 @@ export default function Checkout({ cartItems, clearCart, setView }) {
             type="submit"
             className="w-full bg-premium-gold text-premium-dark font-black py-4 px-6 rounded-xl text-sm flex items-center justify-center gap-2 hover:bg-white hover:shadow-lg transition-colors"
           >
-            Pagar Seguro ${(total).toFixed(2)}
+            Pagar Seguro ${total.toLocaleString('es-CL')}
           </button>
         </form>
 
@@ -294,7 +288,7 @@ export default function Checkout({ cartItems, clearCart, setView }) {
                   <h4 className="font-bold text-white line-clamp-1">{item.product.name}</h4>
                   <p className="text-[10px] text-gray-500 mt-0.5">Var: {item.color} / {item.size} • Cant: {item.quantity}</p>
                 </div>
-                <span className="font-bold text-white shrink-0">${(item.product.price * item.quantity).toFixed(2)}</span>
+                <span className="font-bold text-white shrink-0">${(item.product.price * item.quantity).toLocaleString('es-CL')}</span>
               </div>
             ))}
           </div>
@@ -303,17 +297,17 @@ export default function Checkout({ cartItems, clearCart, setView }) {
           <div className="border-t border-white/5 pt-4 space-y-2.5 text-xs sm:text-sm">
             <div className="flex justify-between text-gray-400">
               <span>Subtotal</span>
-              <span className="text-white font-semibold">${subtotal.toFixed(2)}</span>
+              <span className="text-white font-semibold">${subtotal.toLocaleString('es-CL')}</span>
             </div>
             <div className="flex justify-between text-gray-400">
               <span>Envío</span>
               <span className={shipping === 0 ? 'text-premium-gold font-semibold' : 'text-white'}>
-                {shipping === 0 ? 'Gratis' : `$${shipping.toFixed(2)}`}
+                {shipping === 0 ? 'Gratis' : `$${shipping.toLocaleString('es-CL')}`}
               </span>
             </div>
             <div className="flex justify-between border-t border-white/5 pt-4 text-base font-bold text-white">
               <span>Total a Pagar</span>
-              <span className="text-premium-gold">${total.toFixed(2)}</span>
+              <span className="text-premium-gold">${total.toLocaleString('es-CL')}</span>
             </div>
           </div>
         </div>

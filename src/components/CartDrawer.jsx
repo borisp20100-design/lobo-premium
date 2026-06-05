@@ -5,7 +5,7 @@ export default function CartDrawer({ isOpen, onClose, cartItems, onUpdateQuantit
   if (!isOpen) return null;
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
-  const freeShippingThreshold = 300;
+  const freeShippingThreshold = 150000;
   const missingForFreeShipping = freeShippingThreshold - subtotal;
 
   const handleCheckout = () => {
@@ -43,7 +43,7 @@ export default function CartDrawer({ isOpen, onClose, cartItems, onUpdateQuantit
               <div className="bg-premium-dark/50 px-6 py-3 border-b border-white/5 text-xs">
                 {missingForFreeShipping > 0 ? (
                   <p className="text-gray-400">
-                    Agrega <strong className="text-premium-gold">${missingForFreeShipping.toFixed(2)}</strong> más para obtener <strong className="text-white">Envío Premium Gratis</strong>
+                    Agrega <strong className="text-premium-gold">${missingForFreeShipping.toLocaleString('es-CL')}</strong> más para obtener <strong className="text-white">Envío Premium Gratis</strong>
                   </p>
                 ) : (
                   <p className="text-premium-gold font-semibold flex items-center gap-1">
@@ -68,13 +68,13 @@ export default function CartDrawer({ isOpen, onClose, cartItems, onUpdateQuantit
                   </div>
                   <h3 className="font-bold text-white text-base">Tu carrito está vacío</h3>
                   <p className="text-xs text-gray-500 max-w-xs mt-1 leading-relaxed">
-                    Explora nuestro catálogo y agrega productos importados de alta gama a tu colección.
+                    Personaliza tus smart glasses Lobo Air y agrégalas al carrito para iniciar tu compra.
                   </p>
                   <button 
-                    onClick={() => { onClose(); setView('catalog'); }}
+                    onClick={() => { onClose(); setView('home'); }}
                     className="mt-6 px-6 py-2.5 bg-premium-gold text-premium-dark font-bold text-xs rounded-full hover:bg-white transition-all duration-200"
                   >
-                    Ver Catálogo
+                    Ver Producto
                   </button>
                 </div>
               ) : (
@@ -124,7 +124,7 @@ export default function CartDrawer({ isOpen, onClose, cartItems, onUpdateQuantit
                           </button>
                         </div>
                         <span className="font-extrabold text-white text-sm">
-                          ${(item.product.price * item.quantity).toFixed(2)}
+                          ${(item.product.price * item.quantity).toLocaleString('es-CL')}
                         </span>
                       </div>
                     </div>
@@ -139,18 +139,18 @@ export default function CartDrawer({ isOpen, onClose, cartItems, onUpdateQuantit
                 <div className="space-y-1.5 text-sm">
                   <div className="flex justify-between text-gray-400">
                     <span>Subtotal</span>
-                    <span className="text-white font-semibold">${subtotal.toFixed(2)}</span>
+                    <span className="text-white font-semibold">${subtotal.toLocaleString('es-CL')}</span>
                   </div>
                   <div className="flex justify-between text-gray-400">
                     <span>Envío</span>
                     <span className={subtotal >= freeShippingThreshold ? 'text-premium-gold font-semibold' : 'text-white'}>
-                      {subtotal >= freeShippingThreshold ? 'Gratis' : '$15.00'}
+                      {subtotal >= freeShippingThreshold ? 'Gratis' : '$9.990'}
                     </span>
                   </div>
                   <div className="flex justify-between border-t border-white/5 pt-3 text-base font-bold text-white">
                     <span>Total Estimado</span>
                     <span className="text-premium-gold">
-                      ${(subtotal + (subtotal >= freeShippingThreshold ? 0 : 15.00)).toFixed(2)}
+                      ${(subtotal + (subtotal >= freeShippingThreshold ? 0 : 9990)).toLocaleString('es-CL')}
                     </span>
                   </div>
                 </div>

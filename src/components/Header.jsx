@@ -1,16 +1,19 @@
 import React from 'react';
-import { ShoppingBag, Search, Compass, Menu, X, ArrowUpRight } from 'lucide-react';
+import { ShoppingBag, Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
-export default function Header({ currentView, setView, cartCount, openCart, onSearch }) {
+export default function Header({ currentView, setView, cartCount, openCart }) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-  const [searchOpen, setSearchOpen] = React.useState(false);
-  const [localSearch, setLocalSearch] = React.useState('');
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    onSearch(localSearch);
-    setView('catalog');
+  const navigateToSection = (sectionId) => {
+    setView('home');
+    setMobileMenuOpen(false);
+    setTimeout(() => {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   return (
@@ -18,62 +21,59 @@ export default function Header({ currentView, setView, cartCount, openCart, onSe
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center cursor-pointer" onClick={() => { setView('home'); setMobileMenuOpen(false); }}>
+          <div className="flex items-center cursor-pointer" onClick={() => { setView('home'); setMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
             <Logo className="h-10 md:h-12 w-auto" />
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
             <button 
-              onClick={() => setView('home')} 
+              onClick={() => { setView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
               className={`hover:text-premium-gold transition-colors duration-200 ${currentView === 'home' ? 'text-premium-gold' : 'text-gray-300'}`}
             >
               Inicio
             </button>
             <button 
-              onClick={() => { setView('catalog'); onSearch(''); setLocalSearch(''); }} 
-              className={`hover:text-premium-gold transition-colors duration-200 ${currentView === 'catalog' ? 'text-premium-gold' : 'text-gray-300'}`}
+              onClick={() => navigateToSection('features')} 
+              className="hover:text-premium-gold text-gray-300 transition-colors duration-200"
             >
-              Catálogo
+              Características
             </button>
-            <a href="#faq" onClick={() => setView('home')} className="hover:text-premium-gold text-gray-300 transition-colors duration-200">
-              Preguntas Frecuentes
-            </a>
-            <a href="#contacto" className="hover:text-premium-gold text-gray-300 transition-colors duration-200">
-              Contacto
-            </a>
+            <button 
+              onClick={() => navigateToSection('specs')} 
+              className="hover:text-premium-gold text-gray-300 transition-colors duration-200"
+            >
+              Ficha Técnica
+            </button>
+            <button 
+              onClick={() => navigateToSection('video')} 
+              className="hover:text-premium-gold text-gray-300 transition-colors duration-200"
+            >
+              Video
+            </button>
+            <button 
+              onClick={() => navigateToSection('opinions')} 
+              className="hover:text-premium-gold text-gray-300 transition-colors duration-200"
+            >
+              Opiniones
+            </button>
+            <button 
+              onClick={() => navigateToSection('faq')} 
+              className="hover:text-premium-gold text-gray-300 transition-colors duration-200"
+            >
+              Preguntas
+            </button>
           </nav>
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <div className="relative">
-              {searchOpen ? (
-                <form onSubmit={handleSearchSubmit} className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center bg-premium-lightDark border border-gray-700 rounded-full px-3 py-1.5 w-64 transition-all duration-300">
-                  <input
-                    type="text"
-                    placeholder="Buscar productos..."
-                    value={localSearch}
-                    onChange={(e) => setLocalSearch(e.target.value)}
-                    className="bg-transparent text-sm w-full outline-none pr-6 text-white"
-                    autoFocus
-                  />
-                  <button type="submit" className="absolute right-3 text-gray-400 hover:text-white">
-                    <Search className="w-4 h-4" />
-                  </button>
-                  <button type="button" onClick={() => { setSearchOpen(false); setLocalSearch(''); onSearch(''); }} className="absolute right-8 text-gray-500 hover:text-white">
-                    <X className="w-3.5 h-3.5" />
-                  </button>
-                </form>
-              ) : (
-                <button 
-                  onClick={() => setSearchOpen(true)}
-                  className="p-2.5 rounded-full hover:bg-white/5 text-gray-300 hover:text-premium-gold transition-colors"
-                  aria-label="Buscar"
-                >
-                  <Search className="w-5.5 h-5.5" />
-                </button>
-              )}
-            </div>
+            {/* Direct Buy Button */}
+            <button 
+              onClick={() => navigateToSection('buy-section')}
+              className="hidden sm:inline-flex px-5 py-2.5 bg-premium-gold text-premium-dark font-extrabold text-xs rounded-lg hover:bg-white hover:shadow-md transition-all duration-300"
+            >
+              Comprar Ahora
+            </button>
 
             {/* Cart trigger */}
             <button 
@@ -106,31 +106,47 @@ export default function Header({ currentView, setView, cartCount, openCart, onSe
         <div className="md:hidden glass border-b border-white/10 animate-fade-in">
           <div className="px-4 pt-2 pb-6 space-y-3 flex flex-col text-left">
             <button 
-              onClick={() => { setView('home'); setMobileMenuOpen(false); }} 
+              onClick={() => { setView('home'); setMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
               className="py-2 text-base font-medium text-gray-200 border-b border-white/5"
             >
               Inicio
             </button>
             <button 
-              onClick={() => { setView('catalog'); onSearch(''); setMobileMenuOpen(false); }} 
-              className="py-2 text-base font-medium text-gray-200 border-b border-white/5"
+              onClick={() => navigateToSection('features')} 
+              className="py-2 text-base font-medium text-gray-200 border-b border-white/5 text-left"
             >
-              Catálogo Completo
+              Características
             </button>
-            <a 
-              href="#faq" 
-              onClick={() => setMobileMenuOpen(false)} 
-              className="py-2 text-base font-medium text-gray-200 border-b border-white/5"
+            <button 
+              onClick={() => navigateToSection('specs')} 
+              className="py-2 text-base font-medium text-gray-200 border-b border-white/5 text-left"
+            >
+              Ficha Técnica
+            </button>
+            <button 
+              onClick={() => navigateToSection('video')} 
+              className="py-2 text-base font-medium text-gray-200 border-b border-white/5 text-left"
+            >
+              Video
+            </button>
+            <button 
+              onClick={() => navigateToSection('opinions')} 
+              className="py-2 text-base font-medium text-gray-200 border-b border-white/5 text-left"
+            >
+              Opiniones
+            </button>
+            <button 
+              onClick={() => navigateToSection('faq')} 
+              className="py-2 text-base font-medium text-gray-200 border-b border-white/5 text-left"
             >
               Preguntas Frecuentes
-            </a>
-            <a 
-              href="#contacto" 
-              onClick={() => setMobileMenuOpen(false)} 
-              className="py-2 text-base font-medium text-gray-200"
+            </button>
+            <button 
+              onClick={() => navigateToSection('buy-section')} 
+              className="w-full py-3 bg-premium-gold text-premium-dark font-extrabold text-sm rounded-xl hover:bg-white text-center transition-colors"
             >
-              Contacto
-            </a>
+              Comprar Ahora
+            </button>
           </div>
         </div>
       )}
